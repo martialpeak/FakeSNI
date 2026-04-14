@@ -3,6 +3,9 @@ name: Build FakeSNI for Android
 on:
   workflow_dispatch:
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -17,7 +20,7 @@ jobs:
 
     - name: Build for Android (ARM64)
       run: |
-        GOOS=android GOARCH=arm64 go build -ldflags="-s -w" -o FakeSNI-Android main.go
+        GOOS=android GOARCH=arm64 go build -ldflags="-s -w" -o FakeSNI-Android .
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
